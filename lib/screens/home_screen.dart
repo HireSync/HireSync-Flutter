@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/postulation_screen.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -98,8 +99,8 @@ class NavigationDrawer extends StatelessWidget {
       ListTile(
         leading: const Icon(Icons.work_outline),
         title: const Text('Recruitments'),
-        onTap: () {},
-    
+        onTap: () =>
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>const PostulationCard())),
       ),
       ListTile(
         leading: const Icon(Icons.business_outlined),
