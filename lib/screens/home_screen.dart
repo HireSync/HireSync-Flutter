@@ -14,13 +14,105 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: AppBar (
-        title: const Text('Home'),
+      appBar: AppBar(
+        title: const Text('Good Morning Natalia'),
         backgroundColor: Colors.blue.shade700,
-      
       ),
-      drawer:  NavigationDrawer() ,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            const Text(
+              "LET'S START!",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            ScheduleCard(
+              title: 'SCHEDULE',
+              events: [
+                EventCard(title: 'Entrevista con Inkafarma: 5:00pm', color: Colors.orange),
+                EventCard(title: 'Test Pendiente con Mercado Libre: 11:00am', color: Colors.purple),
+              ],
+            ),
+            SizedBox(height: 10,),
+            ScheduleCard(
+              title: 'Active Jobs Recruitments',
+              events: [
+                EventCard(title: 'Inkafarma', color: const Color.fromARGB(255, 255, 153, 0)),
+                EventCard(title: 'Mercado Libre', color: Colors.purple),
+              ],
+            ),
+          ],
+        ),
+      ),
+      drawer: NavigationDrawer(),
+    );
+  }
+}
+
+class ScheduleCard extends StatelessWidget {
+  final String title;
+  final List<EventCard> events;
+
+  const ScheduleCard({required this.title, required this.events});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.symmetric(horizontal: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: events,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EventCard extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  const EventCard({required this.title, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: color,
+      margin: EdgeInsets.only(bottom: 10),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }
