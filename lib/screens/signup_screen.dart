@@ -211,7 +211,7 @@ class _SignUpState extends State<SignUp> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Error'),
+                                title: Text('Success'),
                                 content: Text('Success registration'),
                                 actions: [
                                   TextButton(
