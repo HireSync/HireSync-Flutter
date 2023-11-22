@@ -23,16 +23,16 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
+          child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
             CircleAvatar(
-              radius: 52,
-              backgroundImage: AssetImage("lib/assets/perfil.jpg")
-            ),
+                radius: 52,
+                backgroundImage: AssetImage("lib/assets/perfil.jpg")),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
@@ -41,19 +41,14 @@ class _ProfileState extends State<Profile> {
               child: Text('Cambiar Foto de Perfil'),
             ),
             const SizedBox(height: 5),
-            Text(
-              'Jeffrey Ocampos',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold
-              )
-            ),
+            Text('Jeffrey Ocampos',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
             Text('Name'),
             const SizedBox(height: 10),
             TextField(
               controller: _nameController,
-              decoration : InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Name',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -61,10 +56,10 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const SizedBox(height: 10),
-            Text('Email'),            
+            Text('Email'),
             TextField(
               controller: _emailController,
-              decoration : InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -76,17 +71,16 @@ class _ProfileState extends State<Profile> {
             TextField(
               controller: _passwordController,
               obscureText: !isVisible2,
-              decoration : InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Password',
                 suffixIcon: IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     setState(() {
-                      isVisible2=!isVisible2;
+                      isVisible2 = !isVisible2;
                     });
                   },
                   icon: Icon(
-                   isVisible2 ? Icons.visibility : Icons.visibility_off
-                  ),
+                      isVisible2 ? Icons.visibility : Icons.visibility_off),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -107,14 +101,14 @@ class _ProfileState extends State<Profile> {
                         decoration: InputDecoration(
                           hintText: 'New Password',
                           suffixIcon: IconButton(
-                            onPressed: (){
+                            onPressed: () {
                               setState(() {
-                                isVisible=!isVisible;
+                                isVisible = !isVisible;
                               });
                             },
-                            icon: Icon(
-                              isVisible ? Icons.visibility : Icons.visibility_off
-                            ),
+                            icon: Icon(isVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.zero,
@@ -136,14 +130,14 @@ class _ProfileState extends State<Profile> {
                         decoration: InputDecoration(
                           hintText: 'Confirm Password',
                           suffixIcon: IconButton(
-                            onPressed: (){
+                            onPressed: () {
                               setState(() {
-                                isVisible1=!isVisible1;
+                                isVisible1 = !isVisible1;
                               });
                             },
-                            icon: Icon(
-                              isVisible1 ? Icons.visibility : Icons.visibility_off
-                            ),
+                            icon: Icon(isVisible1
+                                ? Icons.visibility
+                                : Icons.visibility_off),
                           ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.zero,
@@ -155,38 +149,44 @@ class _ProfileState extends State<Profile> {
                 ),
               ],
             ),
-
             const SizedBox(height: 10),
             Text('Phone Number'),
             const SizedBox(height: 10),
             TextField(
-                controller: _phoneNumberController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                maxLength: 9,
-                decoration: InputDecoration(
-                  hintText: 'Phone Number',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.zero,
-                  ),
+              controller: _phoneNumberController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              maxLength: 9,
+              decoration: InputDecoration(
+                hintText: 'Phone Number',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.zero,
                 ),
+              ),
             ),
             const SizedBox(height: 20),
-            Row(children: [
-              Expanded(
-                child: ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomePage()));
-                }, child: Text('Go Back Home')),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: ElevatedButton(onPressed: (){
-                }, child: Text('Save Changes')),
-              )
-            ],)
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                      },
+                      child: Text('Go Back Home')),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text('Save Changes')),
+                )
+              ],
+            )
           ],
         ),
-      ),
+      )),
     );
   }
 }
