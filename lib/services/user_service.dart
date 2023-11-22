@@ -19,4 +19,31 @@ class UserService {
     }
     return false;
   }
+
+  Future<bool> registerUser(
+      String email, String firstName, String password) async {
+    final url = 'https://electric-difficult-liquid.glitch.me/users';
+
+    final Map<String, dynamic> data = {
+      'email': email,
+      'firstName': firstName,
+      'password': password,
+      "isRecluter": 1,
+    };
+
+    final http.Response response = await http.post(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == HttpStatus.ok) {
+      final jsonResponse = response.body;
+      final user = json.decode(jsonResponse);
+      return user.isNotEmpty;
+    }
+    return false;
+  }
 }
