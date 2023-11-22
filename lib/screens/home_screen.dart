@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/create_organization_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/services/organization_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,11 +13,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final OrganizationService _organizationService = OrganizationService();
+  List<Map<String, dynamic>>? organizations;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadOrganizations();
+  }
+
+  Future<void> _loadOrganizations() async {
+    final List<Map<String, dynamic>>? orgs =
+        await _organizationService.getAllOrganizations();
+    if (orgs != null) {
+      setState(() {
+        organizations = orgs;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Good Morning Natalia'),
+        title: const Text('Good Morning'),
         backgroundColor: Colors.blue.shade700,
       ),
       body: Center(
@@ -31,6 +52,46 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 10),
+            const Text(
+              "CHOOSE YOUR ORGANIZATION",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CreateOrganization()));
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blue.shade900,
+              ),
+              child: const Text(
+                'CREATE NEW ORGANIZATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 20),
+            if (organizations != null)
+              Column(
+                children: organizations!.map((organization) {
+                  return Card(
+                    color: Colors.blue.shade900,
+                    child: ListTile(
+                      title: Text(
+                        organization['name'] ?? '',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              )
+            else
+              const CircularProgressIndicator(),
           ],
         ),
       ),
