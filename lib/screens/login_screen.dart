@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
   bool isVisible = false;
 
   initialize() async {
@@ -40,10 +41,23 @@ class _LoginScreenState extends State<LoginScreen> {
     final isLogged = await UserService()
         .authenticate(_emailController.text, _passwordController.text);
     if (isLogged) {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('username', _emailController.text);
-      await prefs.setBool('isLogged', true);
       navigateTo();
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: Text('Error:'),
+                content: Text('Incorrect email or password'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('OK'),
+                  ),
+                ]);
+          });
     }
   }
 
