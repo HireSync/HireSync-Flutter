@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/profile.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -34,15 +33,23 @@ class _HomePageState extends State<HomePage> {
             ScheduleCard(
               title: 'SCHEDULE',
               events: [
-                EventCard(title: 'Entrevista con Inkafarma: 5:00pm', color: Colors.orange),
-                EventCard(title: 'Test Pendiente con Mercado Libre: 11:00am', color: Colors.purple),
+                EventCard(
+                    title: 'Entrevista con Inkafarma: 5:00pm',
+                    color: Colors.orange),
+                EventCard(
+                    title: 'Test Pendiente con Mercado Libre: 11:00am',
+                    color: Colors.purple),
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             ScheduleCard(
               title: 'Active Jobs Recruitments',
               events: [
-                EventCard(title: 'Inkafarma', color: const Color.fromARGB(255, 255, 153, 0)),
+                EventCard(
+                    title: 'Inkafarma',
+                    color: const Color.fromARGB(255, 255, 153, 0)),
                 EventCard(title: 'Mercado Libre', color: Colors.purple),
               ],
             ),
@@ -118,101 +125,78 @@ class EventCard extends StatelessWidget {
 }
 
 class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}): super(key: key);
+  const NavigationDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build (BuildContext context) =>  Drawer(
-    child: SingleChildScrollView(
-      child: Column(
-
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          buildHearder(context),
-          buildMenu(context),
-        ],
-      ),
-    ),
-
-
-
-  );
-  
-  Widget buildHearder(BuildContext context )=> Material(
-    color :Colors.blue.shade700,
-    child:InkWell(
-      onTap: (){
-        Navigator.pop(context);
-        Navigator.of(context).push(MaterialPageRoute(builder:(context)=>const Profile()));
-
-
-
-
-      },
-      child: Container(
-      
-        padding: EdgeInsets.only(
-        top:24 + MediaQuery.of(context).padding.top,
-        bottom: 24,
-        ),
-        child: Column(children: const[
-          CircleAvatar(
-            radius: 52,
-            backgroundImage: AssetImage("lib/assets/perfil.jpg"),
-            
+  Widget build(BuildContext context) => Drawer(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildHearder(context),
+              buildMenu(context),
+            ],
           ),
-          SizedBox(height: 12,),
-          Text(
-            ' Testigos de Vue',
-            style:TextStyle(fontSize: 25,color:Colors.white)
-          ),
-          Text(
-            'Jeffrey Ocampos ',
-            style:TextStyle(fontSize: 25,color:Colors.white)
-          )
-        ]),
-          
         ),
-      ),
-    );
-  
-  Widget buildMenu(BuildContext context )=> Container(
-    padding: const EdgeInsets.all(24),
-    child: Wrap(
-      runSpacing: 16,
-      children: [
-      ListTile(
-        leading: const Icon(Icons.home_outlined),
-        title: const Text('Home'),
-        onTap: () =>
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context)=>const HomePage())),
-    
-      ),
-      ListTile(
-        leading: const Icon(Icons.work_outline),
-        title: const Text('Recruitments'),
-        onTap: () {},
-    
-      ),
-      ListTile(
-        leading: const Icon(Icons.business_outlined),
-        title: const Text('Organizations'),
-        onTap: () {},
-    
-      ),
-      ListTile(
-        leading: const Icon(Icons.settings_outlined),
-        title: const Text('Settings'),
-        onTap: () {},
-    
-      )
-    
-    
-    
-    
-      ],
-      ),
-    );
+      );
 
-  
+  Widget buildHearder(BuildContext context) => Material(
+        color: Colors.blue.shade700,
+        child: InkWell(
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const Profile()));
+          },
+          child: Container(
+            padding: EdgeInsets.only(
+              top: 24 + MediaQuery.of(context).padding.top,
+              bottom: 24,
+            ),
+            child: Column(children: const [
+              CircleAvatar(
+                radius: 52,
+                backgroundImage: AssetImage("lib/assets/avatar.jpg"),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Text(' Testigos de Vue',
+                  style: TextStyle(fontSize: 25, color: Colors.white)),
+              Text('Jeffrey Ocampos ',
+                  style: TextStyle(fontSize: 25, color: Colors.white))
+            ]),
+          ),
+        ),
+      );
+
+  Widget buildMenu(BuildContext context) => Container(
+        padding: const EdgeInsets.all(24),
+        child: Wrap(
+          runSpacing: 16,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text('Home'),
+              onTap: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomePage())),
+            ),
+            ListTile(
+              leading: const Icon(Icons.work_outline),
+              title: const Text('Recruitments'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.business_outlined),
+              title: const Text('Organizations'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings_outlined),
+              title: const Text('Settings'),
+              onTap: () {},
+            )
+          ],
+        ),
+      );
 }
-

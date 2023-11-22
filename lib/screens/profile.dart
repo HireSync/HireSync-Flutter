@@ -32,7 +32,7 @@ class _ProfileState extends State<Profile> {
             const SizedBox(height: 30),
             CircleAvatar(
                 radius: 52,
-                backgroundImage: AssetImage("lib/assets/perfil.jpg")),
+                backgroundImage: AssetImage("lib/assets/avatar.jpg")),
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
