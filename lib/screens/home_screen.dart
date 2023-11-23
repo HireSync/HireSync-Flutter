@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Good Morning'),
         backgroundColor: Colors.blue.shade700,
       ),
-      body: Center(
+      body: SingleChildScrollView(
+          child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -65,6 +66,8 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue.shade900),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -91,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: Card(
-                      color: Colors.blue.shade900,
+                      color: Colors.purple.shade500,
                       child: ListTile(
                         title: Text(
                           organization['name'] ?? '',
@@ -106,14 +109,14 @@ class _HomePageState extends State<HomePage> {
               const CircularProgressIndicator(),
           ],
         ),
-      ),
-      drawer: const NavigationDrawer(),
+      )),
+      drawer: const NavigationDrawerHome(),
     );
   }
 }
 
-class NavigationDrawer extends StatelessWidget {
-  const NavigationDrawer({Key? key}) : super(key: key);
+class NavigationDrawerHome extends StatelessWidget {
+  const NavigationDrawerHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -149,10 +152,8 @@ class NavigationDrawer extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              Text(' Testigos de Vue',
+              Text('Profile',
                   style: TextStyle(fontSize: 25, color: Colors.white)),
-              Text('Jeffrey Ocampos ',
-                  style: TextStyle(fontSize: 25, color: Colors.white))
             ]),
           ),
         ),
@@ -172,7 +173,8 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.business_outlined),
               title: const Text('Organizations'),
-              onTap: () {},
+              onTap: () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HomePage())),
             ),
             ListTile(
                 leading: const Icon(Icons.logout),
