@@ -47,14 +47,14 @@ class _LoginScreenState extends State<LoginScreen> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-                title: Text('Error:'),
-                content: Text('Incorrect email or password'),
+                title: const Text('Error:'),
+                content: const Text('Incorrect email or password'),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('OK'),
+                    child: const Text('OK'),
                   ),
                 ]);
           });
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   obscureText: !isVisible,
                   decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
+                      icon: const Icon(Icons.lock),
                       border: InputBorder.none,
                       hintText: "Password",
                       suffixIcon: IconButton(
@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             MaterialPageRoute(
                                 builder: (context) => const SignUp()));
                       },
-                      child: Text("SIGN UP"))
+                      child: const Text("SIGN UP"))
                 ],
               )
             ],

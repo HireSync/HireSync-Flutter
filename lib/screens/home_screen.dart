@@ -1,9 +1,13 @@
-import 'package:flutter/foundation.dart';
+//import 'dart:developer';
+
+//import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/create_organization_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/screens/profile.dart';
 import 'package:flutter_app/services/organization_service.dart';
+
+import 'recluters_screens/organization_scree.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -51,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             const Text(
               "CHOOSE YOUR ORGANIZATION",
               style: TextStyle(
@@ -59,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -67,9 +71,6 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                         builder: (context) => const CreateOrganization()));
               },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue.shade900,
-              ),
               child: const Text(
                 'CREATE NEW ORGANIZATION',
                 style: TextStyle(color: Colors.white),
@@ -79,12 +80,23 @@ class _HomePageState extends State<HomePage> {
             if (organizations != null)
               Column(
                 children: organizations!.map((organization) {
-                  return Card(
-                    color: Colors.blue.shade900,
-                    child: ListTile(
-                      title: Text(
-                        organization['name'] ?? '',
-                        style: TextStyle(color: Colors.white),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              OrganizationScreen(organization: organization),
+                        ),
+                      );
+                    },
+                    child: Card(
+                      color: Colors.blue.shade900,
+                      child: ListTile(
+                        title: Text(
+                          organization['name'] ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   );
@@ -95,7 +107,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      drawer: NavigationDrawer(),
+      drawer: const NavigationDrawer(),
     );
   }
 }
@@ -129,7 +141,7 @@ class NavigationDrawer extends StatelessWidget {
               top: 24 + MediaQuery.of(context).padding.top,
               bottom: 24,
             ),
-            child: Column(children: const [
+            child: const Column(children: [
               CircleAvatar(
                 radius: 52,
                 backgroundImage: AssetImage("lib/assets/avatar.jpg"),

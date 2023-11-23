@@ -52,7 +52,7 @@ class _SignUpState extends State<SignUp> {
 
                 const SizedBox(height: 20),
                 Container(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                 ),
 
                 Container(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   decoration: BoxDecoration(
@@ -115,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: !isVisible,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.lock),
+                        icon: const Icon(Icons.lock),
                         border: InputBorder.none,
                         hintText: "Password",
                         suffixIcon: IconButton(
@@ -151,7 +151,7 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: !isVisible1,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.lock),
+                        icon: const Icon(Icons.lock),
                         border: InputBorder.none,
                         hintText: "Confirm Password",
                         suffixIcon: IconButton(
@@ -178,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                     child: TextFormField(
                       keyboardType: TextInputType.number,
                       maxLength: 9,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         icon: Icon(Icons.phone),
                         border: InputBorder.none,
                         hintText: "Phone Number",
@@ -211,14 +211,14 @@ class _SignUpState extends State<SignUp> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Success'),
-                                content: Text('Success registration'),
+                                title: const Text('Success'),
+                                content: const Text('Success registration'),
                                 actions: [
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('OK'),
+                                    child: const Text('OK'),
                                   ),
                                 ],
                               );
@@ -244,7 +244,7 @@ class _SignUpState extends State<SignUp> {
                               MaterialPageRoute(
                                   builder: (context) => const LoginScreen()));
                         },
-                        child: Text("LOGIN"))
+                        child: const Text("LOGIN"))
                   ],
                 )
               ],

@@ -10,12 +10,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _newpasswordController = TextEditingController();
-  TextEditingController _confirmpasswordController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _newpasswordController = TextEditingController();
+  final TextEditingController _confirmpasswordController =
+      TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   bool isVisible = false;
   bool isVisible1 = false;
   bool isVisible2 = false;
@@ -30,7 +31,7 @@ class _ProfileState extends State<Profile> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-            CircleAvatar(
+            const CircleAvatar(
                 radius: 52,
                 backgroundImage: AssetImage("lib/assets/avatar.jpg")),
             const SizedBox(height: 10),
@@ -38,17 +39,17 @@ class _ProfileState extends State<Profile> {
               onPressed: () {
                 // Acción cuando se presiona el botón
               },
-              child: Text('Cambiar Foto de Perfil'),
+              child: const Text('Cambiar Foto de Perfil'),
             ),
             const SizedBox(height: 5),
-            Text('Jeffrey Ocampos',
+            const Text('Jeffrey Ocampos',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 15),
-            Text('Name'),
+            const Text('Name'),
             const SizedBox(height: 10),
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Name',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -56,10 +57,10 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const SizedBox(height: 10),
-            Text('Email'),
+            const Text('Email'),
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -67,7 +68,7 @@ class _ProfileState extends State<Profile> {
               ),
             ),
             const SizedBox(height: 10),
-            Text('Password'),
+            const Text('Password'),
             TextField(
               controller: _passwordController,
               obscureText: !isVisible2,
@@ -82,7 +83,7 @@ class _ProfileState extends State<Profile> {
                   icon: Icon(
                       isVisible2 ? Icons.visibility : Icons.visibility_off),
                 ),
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
                 ),
               ),
@@ -94,7 +95,7 @@ class _ProfileState extends State<Profile> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('New Password'),
+                      const Text('New Password'),
                       TextField(
                         controller: _newpasswordController,
                         obscureText: !isVisible,
@@ -110,7 +111,7 @@ class _ProfileState extends State<Profile> {
                                 ? Icons.visibility
                                 : Icons.visibility_off),
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
@@ -118,12 +119,12 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Confirm Password'),
+                      const Text('Confirm Password'),
                       TextField(
                         controller: _confirmpasswordController,
                         obscureText: !isVisible1,
@@ -139,7 +140,7 @@ class _ProfileState extends State<Profile> {
                                 ? Icons.visibility
                                 : Icons.visibility_off),
                           ),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderRadius: BorderRadius.zero,
                           ),
                         ),
@@ -150,14 +151,14 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             const SizedBox(height: 10),
-            Text('Phone Number'),
+            const Text('Phone Number'),
             const SizedBox(height: 10),
             TextField(
               controller: _phoneNumberController,
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               maxLength: 9,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Phone Number',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -175,12 +176,12 @@ class _ProfileState extends State<Profile> {
                             MaterialPageRoute(
                                 builder: (context) => const HomePage()));
                       },
-                      child: Text('Go Back Home')),
+                      child: const Text('Go Back Home')),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text('Save Changes')),
+                      onPressed: () {}, child: const Text('Save Changes')),
                 )
               ],
             )

@@ -6,10 +6,14 @@ import '../../models/organization.dart';
 
 import 'package:flutter/material.dart';
 
+import 'recruiments_screen.dart';
+
 class OrganizationScreen extends StatefulWidget {
-  const OrganizationScreen({Key? key, required this.organization})
-      : super(key: key);
-  final Organization organization;
+  const OrganizationScreen({
+    Key? key,
+    this.organization,
+  }) : super(key: key);
+  final Map<String, dynamic>? organization;
 
   @override
   State<OrganizationScreen> createState() => _OrganizationScreenState();
@@ -21,7 +25,8 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.organization.name,
+          widget.organization?['name'] ?? '',
+          //"Organization",
           style: const TextStyle(color: Colors.white),
         ),
         automaticallyImplyLeading: true,
@@ -34,32 +39,37 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        // Agrega SingleChildScrollView aquí
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.95,
-            child: const Column(
+            child: Column(
               children: [
-                FirstSectionWidget(),
-                SecondSectionWidget(
+                const FirstSectionWidget(),
+                const SecondSectionWidget(
                     title: "Make new test for software developer candidates",
                     time: "9am - 1pm"),
                 Column(
                   children: [
-                    ThirdSectionCardWidget(
-                        date: "2023/04/12",
-                        title:
-                            "2023-Business Administration UPC Interniship Program Recuirment",
-                        status: "Reviewing candidates",
-                        jobpost: "Hiring open",
-                        organizer: "Jeffrey Ocampos"),
-                    ThirdSectionCardWidget(
-                        date: "2023/02/10",
-                        title:
-                            "Staff team for Miraflores shop part-timer recruitment (No CV needed)",
-                        status: "Interviewing candidates",
-                        jobpost: "Closed",
-                        organizer: "Jeffrey Ocampos"),
+                    for (var recruitment
+                        in widget.organization?['recruitments'] ?? [])
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RecruitmentScreen(recruitment: recruitment),
+                            ),
+                          );
+                        },
+                        child: ThirdSectionCardWidget(
+                          date: recruitment['startdate'] ?? "",
+                          title: recruitment['name'] ?? "",
+                          status: recruitment['status'] ?? "",
+                          jobpost: recruitment['jobpost'] ?? "",
+                          organizer: recruitment['organizer'] ?? "",
+                        ),
+                      ),
                   ],
                 )
               ],
@@ -203,7 +213,7 @@ class ThirdSectionCardWidget extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                    text: 'Organizer: ',
+                    text: 'Status: ',
                     style: const TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight
@@ -212,7 +222,7 @@ class ThirdSectionCardWidget extends StatelessWidget {
                     ),
                     children: [
                       TextSpan(
-                        text: organizer,
+                        text: status,
                         style: const TextStyle(
                           color: Colors
                               .black, // Color negro para el resto del texto
