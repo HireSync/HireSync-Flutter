@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/create_recruitment.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import '../../models/organization.dart';
 
@@ -31,12 +32,6 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
         ),
         automaticallyImplyLeading: true,
         backgroundColor: Colors.blue.shade700,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            // Scaffold.of(context).openDrawer();
-          },
-        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -44,7 +39,7 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
             width: MediaQuery.of(context).size.width * 0.95,
             child: Column(
               children: [
-                const FirstSectionWidget(),
+                FirstSectionWidget(organization: widget.organization),
                 const SecondSectionWidget(
                     title: "Make new test for software developer candidates",
                     time: "9am - 1pm"),
@@ -77,12 +72,15 @@ class _OrganizationScreenState extends State<OrganizationScreen> {
           ),
         ),
       ),
+      drawer: const NavigationDrawerHome(),
     );
   }
 }
 
 class FirstSectionWidget extends StatelessWidget {
-  const FirstSectionWidget({super.key});
+  final Map<String, dynamic>? organization;
+  const FirstSectionWidget({Key? key, required this.organization})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +89,16 @@ class FirstSectionWidget extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-            onPressed: null,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateRecruitment(
+                    organization: organization,
+                  ),
+                ),
+              );
+            },
             style: ElevatedButton.styleFrom(
               side: const BorderSide(color: Color(0xFF3066BE), width: 2),
             ),
