@@ -30,7 +30,7 @@ class _CreateOrganizationState extends State<CreateOrganization> {
             ),
             TextField(
               controller: _companyController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Name',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.zero,
@@ -88,7 +88,7 @@ class _CreateOrganizationState extends State<CreateOrganization> {
               ],
             ),
             const SizedBox(height: 20),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {

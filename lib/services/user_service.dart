@@ -22,7 +22,7 @@ class UserService {
 
   Future<bool> registerUser(
       String email, String firstName, String password) async {
-    final url = 'https://electric-difficult-liquid.glitch.me/users';
+    const url = 'https://electric-difficult-liquid.glitch.me/users';
 
     final Map<String, dynamic> data = {
       'email': email,
