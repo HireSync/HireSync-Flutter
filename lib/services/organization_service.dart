@@ -37,4 +37,30 @@ class OrganizationService {
     }
     return null;
   }
+
+  Future<bool> addRecruitmentToOrganization(
+    int organizationId,
+    Map<String, dynamic> recruitmentData,
+  ) async {
+    try {
+      final String recruitmentUrl = '$_baseUrl/$organizationId/recruitments';
+      final http.Response response = await http.post(
+        Uri.parse(recruitmentUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(recruitmentData),
+      );
+      print('Respuesta del servidor: ${response.body}');
+      if (response.statusCode == HttpStatus.ok) {
+        final jsonResponse = response.body;
+        final recruitment = json.decode(jsonResponse);
+        return recruitment.isNotEmpty;
+      }
+      return false;
+    } catch (e) {
+      print('Error al enviar solicitud: $e');
+      return false;
+    }
+  }
 }

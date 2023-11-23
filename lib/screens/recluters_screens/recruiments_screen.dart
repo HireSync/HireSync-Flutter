@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/home_screen.dart';
 
 class RecruitmentScreen extends StatefulWidget {
   const RecruitmentScreen({super.key, this.recruitment});
@@ -19,12 +20,6 @@ class _RecruitmentScreenState extends State<RecruitmentScreen> {
         ),
         automaticallyImplyLeading: true,
         backgroundColor: Colors.blue.shade700,
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            // Scaffold.of(context).openDrawer();
-          },
-        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -53,6 +48,7 @@ class _RecruitmentScreenState extends State<RecruitmentScreen> {
           ),
         ),
       ),
+      drawer: const NavigationDrawerHome(),
     );
   }
 }
