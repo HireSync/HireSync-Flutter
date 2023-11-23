@@ -1,9 +1,15 @@
+import 'dart:ffi';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/organization.dart';
+import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/screens/create_organization_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/screens/profile.dart';
+import 'package:flutter_app/screens/recluters_screens/organization_scree.dart';
 import 'package:flutter_app/services/organization_service.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +20,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final OrganizationService _organizationService = OrganizationService();
+  late User currentUser;
+ 
+
   List<Map<String, dynamic>>? organizations;
 
   @override
@@ -120,9 +129,10 @@ class NavigationDrawer extends StatelessWidget {
         color: Colors.blue.shade700,
         child: InkWell(
           onTap: () {
-            Navigator.pop(context);
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => const Profile()));
+             Navigator.pop(context);
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => Profile(user:User(id: 0,email: '', firstName: '', password: '', phone: 1))),
+            );
           },
           child: Container(
             padding: EdgeInsets.only(
@@ -160,7 +170,8 @@ class NavigationDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.business_outlined),
               title: const Text('Organizations'),
-              onTap: () {},
+              onTap:  () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const OrganizationScreen(organization: Organization(id:1,name:'organizacion'),))),
             ),
             ListTile(
                 leading: const Icon(Icons.logout),

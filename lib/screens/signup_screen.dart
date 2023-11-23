@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:flutter_app/services/user_service.dart';
 
 class SignUp extends StatefulWidget {
+  
   const SignUp({Key? key}) : super(key: key);
+  
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -21,6 +24,8 @@ class _SignUpState extends State<SignUp> {
   bool isButton1Selected = false;
   bool isButton2Selected = false;
   final formkey = GlobalKey<FormState>();
+  late int _id;
+  late User _user;
 
   @override
   Widget build(BuildContext context) {
@@ -198,6 +203,7 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
                           bool registered = await _userService.registerUser(
+                              
                               _emailController.text,
                               _nameController.text,
                               _passwordController.text);

@@ -25,7 +25,7 @@ class OrganizationService {
     return false;
   }
 
-  Future<List<Map<String, dynamic>>?> getAllOrganizations() async {
+    Future<List<Map<String, dynamic>>?> getAllOrganizations() async {
     final http.Response response = await http.get(Uri.parse(_baseUrl));
 
     if (response.statusCode == HttpStatus.ok) {

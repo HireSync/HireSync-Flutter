@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/models/user.dart';
 import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/services/user_service.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({Key? key, required this.user})
+   : super(key: key);
+  final User user;
+  
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -19,6 +24,9 @@ class _ProfileState extends State<Profile> {
   bool isVisible = false;
   bool isVisible1 = false;
   bool isVisible2 = false;
+  UserService _userService = UserService();
+  late int _id;
+  late User _user;
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +188,32 @@ class _ProfileState extends State<Profile> {
                 SizedBox(width: 10),
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text('Save Changes')),
+                      onPressed: () async {
+
+                        String newName = _nameController.text;
+                        String newEmail = _emailController.text;
+                        String newPassword =_newpasswordController.text;
+                        String newPhoneNumber = _phoneNumberController.text;
+
+                         
+                         bool updated = await _userService.updateUser(
+                         widget.user.id,
+                         newName,
+                         newEmail,
+                         newPassword,
+                         int.parse(newPhoneNumber), 
+                        );
+                         if (updated) {
+                         // Mostrar SnackBar si la operación se completó con éxito
+                        ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                        content: Text('Cambios guardados con éxito'),
+                      duration: Duration(seconds: 2),
+                        ),
+                      );
+                      }
+                       
+                      }, child: Text('Save Changes')),
                 )
               ],
             )
@@ -189,4 +222,28 @@ class _ProfileState extends State<Profile> {
       )),
     );
   }
+
+
+
+
+    @override
+void initState() {
+ super.initState();
+    _id = widget.user.id;
+    _loadUserData(_id);
+}
+
+void _loadUserData(int id) async {
+  final userData = await _userService.getById(id);
+  if (userData != null) {
+    setState(() {
+      _nameController.text = userData.firstName ?? '';
+      _emailController.text = userData.email ?? '';
+      _passwordController.text=userData.password ?? '';
+       _phoneNumberController.text = userData.phone?.toString() ?? '';
+      // No veo 'phoneNumber' en tu clase User
+      // Actualizar otros campos según sea necesario
+    });
+  }
+}
 }
